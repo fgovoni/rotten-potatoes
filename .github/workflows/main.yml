@@ -16,6 +16,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PWD }}
+          
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v2.7.0
+        with: 
+          context: ./src
+          file: ./src/Dockerfile
+          push: true
+          tags: |
+            govoni/rotten-potatoes:latest
+            govoni/rotten-potatoes:${{ github.run_number }}
+        
 
       
       - name: Run a one-line script
